@@ -1,17 +1,28 @@
-import cv2 
-import numpy as np 
-import matplotlib.pyplot as plt 
-def analyze_histogram(image_path): 
-image = cv2.imread(image_path) 
-color_channels = ('b', 'g', 'r') 
-plt.figure(figsize=(10, 5)) 
-for i, color in enumerate(color_channels): 
-histogram = cv2.calcHist([image], [i], None, [256], [0, 256]) 
-plt.plot(histogram, color=color, label=f"{color.upper()} Channel") 
-plt.xlim([0, 256])  
-plt.title("Color Histogram Analysis") 
-plt.xlabel("Pixel Intensity") 
-plt.ylabel("Frequency") 
-plt.legend() 
-plt.show() 
-analyze_histogram("C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/istockphoto-1148989572-612x612.jpg")
+import cv2
+import matplotlib.pyplot as plt
+
+def analyze_color_histogram():
+    
+    image = cv2.imread(r"C:\Users\KAVIYA_MUTHUKRISHNAN\Pictures\istockphoto-1148989572-612x612.jpg")
+
+    if image is None:
+        print("Image not found! Check file path.")
+        return
+
+    colors = ('b', 'g', 'r')
+
+    plt.figure()
+    plt.title("Color Histogram Analysis")
+    plt.xlabel("Pixel Intensity (0 - 255)")
+    plt.ylabel("Frequency")
+
+   
+    for i, color in enumerate(colors):
+        histogram = cv2.calcHist([image], [i], None, [256], [0, 256])
+        plt.plot(histogram, color=color)
+        plt.xlim([0, 256])
+
+    plt.show()
+
+# Call function
+analyze_color_histogram()
