@@ -1,9 +1,11 @@
 import cv2
-image = cv2.imread("C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/istockphoto-1148989572-612x612.jpg")
-bigger_image = cv2.resize(image, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
-smaller_image = cv2.resize(image, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
-cv2.imshow("Original Image", image)
-cv2.imshow("Bigger Image", bigger_image)
-cv2.imshow("Smaller Image", smaller_image)
+import numpy as np
+img = cv2.imread("C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/input.jpg")
+small = cv2.resize(img, None, fx=0.5, fy=0.5)
+big = cv2.resize(img, None, fx=1.5, fy=1.5)
+small_resized = cv2.resize(small, (img.shape[1], img.shape[0]))
+big_resized = cv2.resize(big, (img.shape[1], img.shape[0]))
+combined = np.hstack((img, small_resized, big_resized))
+cv2.imshow("Original | Smaller | Bigger", combined)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
