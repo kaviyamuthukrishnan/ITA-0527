@@ -1,6 +1,9 @@
 import cv2
-img = cv2.imread("C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/istockphoto-1148989572-612x612.jpg")
-rotated_img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-cv2.imshow("Rotated Image", rotated_img)
+import numpy as np
+img = cv2.imread("C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/input.jpg")
+rotated = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+rotated_resized = cv2.resize(rotated, (img.shape[1], img.shape[0]))
+combined = np.hstack((img, rotated_resized))
+cv2.imshow("Original Image | 90 Degree Clockwise Rotated Image", combined)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
