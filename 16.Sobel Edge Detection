@@ -1,0 +1,13 @@
+import cv2
+import numpy as np
+img = cv2.imread("C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/input.jpg")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=3)
+sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
+sobel = cv2.magnitude(sobelx, sobely)
+sobel = cv2.convertScaleAbs(sobel)
+sobel_colored = cv2.cvtColor(sobel, cv2.COLOR_GRAY2BGR)
+combined = np.hstack((img, sobel_colored))
+cv2.imshow("Input (Left) | Sobel Output (Right)", combined)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
