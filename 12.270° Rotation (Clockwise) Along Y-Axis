@@ -1,0 +1,11 @@
+import cv2
+import numpy as np
+img = cv2.imread("C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/input.jpg")
+flip_y = cv2.flip(img, 1)
+rotated = cv2.rotate(flip_y, cv2.ROTATE_90_CLOCKWISE)
+h, w = img.shape[:2]
+rotated_resized = cv2.resize(rotated, (w, h))
+combined = np.hstack((img, rotated_resized))
+cv2.imshow("Input (Left) | 270 Rotation Output (Right)", combined)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
