@@ -1,0 +1,26 @@
+import cv2
+
+img = cv2.imread("/C:/Users/KAVIYA_MUTHUKRISHNAN/Pictures/OIP (2).jpg")
+
+output = img.copy()
+
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+eye_cascade = cv2.CascadeClassifier("/C:/Users/KAVIYA_MUTHUKRISHNAN/Desktop/lab.cv/haarcascade_eye.xml")
+
+eyes = eye_cascade.detectMultiScale(gray,1.1,5)
+
+print("Eyes detected:",len(eyes))
+
+for (x,y,w,h) in eyes:
+    cv2.rectangle(output,(x,y),(x+w,y+h),(255,0,0),2)
+
+img = cv2.resize(img,(500,400))
+output = cv2.resize(output,(500,400))
+
+combined = cv2.hconcat([img,output])
+
+cv2.imshow("Input Image | Eye Detection",combined)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
