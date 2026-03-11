@@ -1,0 +1,31 @@
+import cv2
+path = "C:/Users/KAVIYA_MUTHUKRISHNAN/Downloads/7955161-uhd_2160_4096_25fps.mp4"
+cap1 = cv2.VideoCapture(path)   # original video
+cap2 = cv2.VideoCapture(path)   # reverse video
+frame_count = int(cap2.get(cv2.CAP_PROP_FRAME_COUNT))
+reverse_index = frame_count - 1
+while True:
+    ret1, frame1 = cap1.read()
+
+  
+    cap2.set(cv2.CAP_PROP_POS_FRAMES, reverse_index)
+    ret2, frame2 = cap2.read()
+
+    if not ret1 or not ret2:
+        break
+
+    frame1 = cv2.resize(frame1,(640,400))
+    frame2 = cv2.resize(frame2,(640,400))
+
+    combined = cv2.hconcat([frame1, frame2])
+
+    cv2.imshow("Original Video | Reverse Video", combined)
+
+    reverse_index -= 1
+
+    if cv2.waitKey(30) & 0xFF == 27:
+        break
+
+cap1.release()
+cap2.release()
+cv2.destroyAllWindows()
